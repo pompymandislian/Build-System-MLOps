@@ -1,0 +1,37 @@
+version: "3.8"
+services:
+  backend:
+    image: backend:latest
+    build:
+      context: ./backend
+    container_name: backend-container
+    ports:
+      - "8000:8000"
+    volumes:
+      - /home/work/devops-mlops/mlops/backend-volume:/app/backend
+    networks:
+      - my-network
+    depends_on:
+      - db
+    env_file:
+      - /home/work/devops-mlops/mlops/backend/.env
+
+  db:
+    image: postgres:latest
+    container_name: db-container
+    ports:
+      - 5432:5432
+    volumes:
+      - postgres-volume:/var/lib/postgresql/data
+      - ./postgres/init.sql:/docker-entrypoint-initdb.d/init.sql
+    env_file:
+      - /home/work/devops-mlops/mlops/postgres/.env
+    networks:
+      - my-network
+
+networks:
+  my-network:
+    driver: bridge
+
+volumes:
+  postgres-volume:
