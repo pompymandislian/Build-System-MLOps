@@ -1,8 +1,7 @@
-# Workflow ini akan melakukan build dan testing terhadap development app.
 name: Dev Testing 🔎 
 
 on:
-  pull_request:
+  push:
     branches: [ "main" ]
 
 jobs:
