@@ -22,14 +22,14 @@ jobs:
 
       - name: Build and Run Container
         run: |
-          sudo docker compose up db backend --build --detach
+          sudo docker compose up backend db --build --detach
           
       - name: Hit Endpoint
         run: |
           sleep 20
-          curl ${{ vars.DEV_URL }}
+          curl http://localhost:8000/
           
       - name: Testing
         run: |
           python3 testing/test.py
-          python3 testing/test.py
+    
