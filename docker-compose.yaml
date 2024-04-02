@@ -13,8 +13,8 @@ services:
       - my-network
     depends_on:
       - db
-    env_file:
-      - /home/work/devops-mlops/mlops/backend/.env
+    # env_file:
+    #   - /home/work/devops-mlops/mlops/backend/.env
 
   db:
     image: postgres:latest
@@ -24,8 +24,8 @@ services:
     volumes:
       - postgres-volume:/var/lib/postgresql/data
       - ./postgres/init.sql:/docker-entrypoint-initdb.d/init.sql
-    env_file:
-      - /home/work/devops-mlops/mlops/postgres/.env
+    # env_file:
+    #   - /home/work/devops-mlops/mlops/postgres/.env
     networks:
       - my-network
 
