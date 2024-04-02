@@ -17,29 +17,15 @@ def test_endpoint():
     print("URL:", url)
     
     # Kirim permintaan POST ke endpoint
-    try:
-        response = requests.post(url, json=data)
-        
-        # Pastikan respons memiliki status code 200 OK
-        if response.status_code == 200:
-            print("Response:", response.json())
-            # Pastikan respons memiliki kunci "prediction"
-            assert "prediction" in response.json()
-        else:
-            print("Error:", response.status_code, response.text)
+    response = requests.post(url, json=data)
     
-    # Tangani kesalahan saat mengirim permintaan
-    except requests.exceptions.RequestException as e:
-        if isinstance(e, requests.exceptions.ConnectionError):
-            print("Error: Tidak dapat terhubung ke server. Pastikan server berjalan dan tersedia di URL yang ditentukan.")
-        elif isinstance(e, requests.exceptions.Timeout):
-            print("Error: Permintaan waktu habis. Periksa koneksi jaringan Anda.")
-        elif isinstance(e, requests.exceptions.HTTPError):
-            print("Error: Terjadi kesalahan HTTP:", e.response.status_code)
-        elif isinstance(e, requests.exceptions.ConnectionResetError):
-            print("Error: Koneksi direset oleh pihak lain.")
-        else:
-            print("Error:", e)
+    # Pastikan respons memiliki status code 200 OK
+    if response.status_code == 200:
+        print("Response:", response.json())
+        # Pastikan respons memiliki kunci "prediction"
+        assert "prediction" in response.json()
+    else:
+        print("Error:", response.status_code, response.text)
 
 if __name__ == "__main__":
     test_endpoint()
