@@ -14,11 +14,11 @@ services:
     depends_on:
       - db
     environment:
-      - POSTGRES_USER: ${{ secrets.DB_USER_DEV }}
-      - POSTGRES_PASSWORD: ${{ secrets.DB_PASSWORD_DEV }}
-      - POSTGRES_DB: ${{ vars.DB_DBNAME_DEV }}
-      - POSTGRES_HOST: ${{ secrets.DB_HOST_DEV }}
-      - POSTGRES_PORT: ${{ secrets.DB_PORT_DEV }}
+      - POSTGRES_USER='${{ secrets.DB_USER_DEV }}'
+      - POSTGRES_PASSWORD='${{ secrets.DB_PASSWORD_DEV }}'
+      - POSTGRES_DB='${{ vars.DB_DBNAME_DEV }}'
+      - POSTGRES_HOST='${{ secrets.DB_HOST_DEV }}'
+      - POSTGRES_PORT='${{ secrets.DB_PORT_DEV }}'
 
   db:
     image: postgres:latest
@@ -28,6 +28,8 @@ services:
     volumes:
       - postgres-volume:/var/lib/postgresql/data
       - ./postgres/init.sql:/docker-entrypoint-initdb.d/init.sql
+    environment:
+      - POSTGRES_DB='${{ vars.DB_DBNAME_DEV }}'
     networks:
       - my-network
 
