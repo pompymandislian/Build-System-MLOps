@@ -28,6 +28,7 @@ jobs:
         run: |
           sleep 20
           curl ${{ secrets.DEV_URL }}
+
           
       - name: Testing
         run: |
