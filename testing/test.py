@@ -1,7 +1,7 @@
 import requests
 
 def test_endpoint():
-    url = "http://localhost:8000/predict/"
+    url = "http://localhost:8000/app/"
     
     # Data yang akan diuji
     data = {
