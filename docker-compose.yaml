@@ -14,11 +14,11 @@ services:
     depends_on:
       - db
     environment:
-      - POSTGRES_USER=${DB_USER_DEV}
-      - POSTGRES_PASSWORD=${DB_PASSWORD_DEV}
-      - POSTGRES_DB=${DB_DBNAME_DEV}
-      - POSTGRES_HOST==${DB_HOST_DEV}
-      - POSTGRES_PORT==${DB_PORT_DEV}
+      - POSTGRES_USER: ${{ secrets.DB_USER_DEV }}
+      - POSTGRES_PASSWORD: ${{ secrets.DB_PASSWORD_DEV }}
+      - POSTGRES_DB: ${{ vars.DB_DBNAME_DEV }}
+      - POSTGRES_HOST: ${{ secrets.DB_HOST_DEV }}
+      - POSTGRES_PORT: ${{ secrets.DB_PORT_DEV }}
 
   db:
     image: postgres:latest
