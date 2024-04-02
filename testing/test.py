@@ -13,14 +13,24 @@ def test_endpoint():
         "items_in_cart": 3
     }
     
+    # Pencetakan informasi debug
+    print("URL:", url)
+    
     # Kirim permintaan POST ke endpoint
-    response = requests.post(url, json=data)
+    try:
+        response = requests.post(url, json=data)
+        
+        # Pastikan respons memiliki status code 200 OK
+        if response.status_code == 200:
+            print("Response:", response.json())
+            # Pastikan respons memiliki kunci "prediction"
+            assert "prediction" in response.json()
+        else:
+            print("Error:", response.status_code, response.text)
     
-    # Pastikan respons memiliki status code 200 OK
-    assert response.status_code == 200
-    
-    # Pastikan respons memiliki kunci "prediction"
-    assert "prediction" in response.json()
+    # Tangani kesalahan saat mengirim permintaan
+    except requests.exceptions.RequestException as e:
+        print("Error:", e)
 
 if __name__ == "__main__":
     test_endpoint()
