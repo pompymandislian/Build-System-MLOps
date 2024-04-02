@@ -30,7 +30,16 @@ def test_endpoint():
     
     # Tangani kesalahan saat mengirim permintaan
     except requests.exceptions.RequestException as e:
-        print("Error:", e)
+        if isinstance(e, requests.exceptions.ConnectionError):
+            print("Error: Tidak dapat terhubung ke server. Pastikan server berjalan dan tersedia di URL yang ditentukan.")
+        elif isinstance(e, requests.exceptions.Timeout):
+            print("Error: Permintaan waktu habis. Periksa koneksi jaringan Anda.")
+        elif isinstance(e, requests.exceptions.HTTPError):
+            print("Error: Terjadi kesalahan HTTP:", e.response.status_code)
+        elif isinstance(e, requests.exceptions.ConnectionResetError):
+            print("Error: Koneksi direset oleh pihak lain.")
+        else:
+            print("Error:", e)
 
 if __name__ == "__main__":
     test_endpoint()
