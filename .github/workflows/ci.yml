@@ -27,7 +27,7 @@ jobs:
       - name: Hit Endpoint
         run: |
           sleep 20
-          curl -X GET http://localhost:8000/predict/
+          while curl -X GET http://localhost:8000/predict/
 
           
       - name: Testing
