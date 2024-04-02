@@ -6,7 +6,7 @@ services:
       dockerfile: Dockerfile
     restart: always
     depends_on:
-      - database
+      - db
     ports:
       - 5002:5000
     env_file:
