@@ -20,6 +20,10 @@ jobs:
           echo "POSTGRES_HOST=${{ secrets.DB_HOST_DEV }}" >> .env
           echo "POSTGRES_PORT=${{ secrets.DB_PORT_DEV }}" >> .env
 
+      - name: Build Docker Image
+        run: |
+          docker build -t backend:latest .
+          
       - name: Build and Run Container
         run: |
           sudo docker compose up backend db --build --detach
@@ -32,4 +36,3 @@ jobs:
       - name: Testing
         run: |
           python3 testing/test.py
-    
