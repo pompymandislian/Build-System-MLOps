@@ -12,10 +12,6 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v2
       
-      # Menambahkan langkah untuk memeriksa log kontainer backend
-      - name: Check Backend Container Logs
-        run: docker logs backend-container
-
       - name: Create .env file
         run: |
           echo "POSTGRES_USER=${{ secrets.DB_USER_DEV }}" > .env
@@ -32,6 +28,7 @@ jobs:
         run: |
           sleep 20
           curl http://localhost:8000/
+          curl http://localhost:8000/app
           
       - name: Testing
         run: |
