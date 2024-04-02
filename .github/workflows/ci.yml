@@ -24,11 +24,12 @@ jobs:
         run: |
           sudo docker compose up db backend --build --detach
           
-      # - name: Wait for server to start
-      #   run: |
-      #     sleep 20
-      #     while ! curl -s http://localhost:8000/predict/; do sleep 1; done
+      - name: Hit Endpoint
+        run: |
+          sleep 20
+          curl ${{ vars.DEV_URL }}
           
       - name: Testing
         run: |
+          python3 testing/test.py
           python3 testing/test.py
