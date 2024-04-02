@@ -22,8 +22,8 @@ jobs:
 
       - name: Build and Run Container
         run: |
-          sudo docker compose up database backend-container --build --detach
-
+          sudo docker compose up db backend-container --build --detach
+          
       - name: Hit Endpoint
         run: |
           sleep 20
