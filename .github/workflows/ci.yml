@@ -16,7 +16,7 @@ jobs:
         run: |
           echo "POSTGRES_USER=${{ secrets.DB_USER_DEV }}" > .env
           echo "POSTGRES_PASSWORD=${{ secrets.DB_PASSWORD_DEV }}" >> .env
-          echo "POSTGRES_DB=${{ vars.DB_DBNAME_DEV }}" >> .env
+          echo "POSTGRES_DB=${{ secrets.DB_DBNAME_DEV }}" >> .env
           echo "POSTGRES_HOST=${{ secrets.DB_HOST_DEV }}" >> .env
           echo "POSTGRES_PORT=${{ secrets.DB_PORT_DEV }}" >> .env
 
@@ -27,7 +27,7 @@ jobs:
       - name: Hit Endpoint
         run: |
           sleep 20
-          curl ${{ vars.DEV_URL }}
+          curl ${{ secrets.DEV_URL }}
           
       - name: Testing
         run: |
