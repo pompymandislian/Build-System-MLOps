@@ -13,13 +13,8 @@ services:
       - my-network
     depends_on:
       - db
-    environment:
-      - POSTGRES_USER=$DB_USER_DEV
-      - POSTGRES_PASSWORD=$DB_PASSWORD_DEV
-      - POSTGRES_DB=$DB_DBNAME_DEV
-      - POSTGRES_HOST=$DB_HOST_DEV
-      - POSTGRES_PORT=$DB_PORT_DEV
-
+    env_file:
+      - .env
   db:
     image: postgres:latest
     container_name: db-container
@@ -28,8 +23,8 @@ services:
     volumes:
       - postgres-volume:/var/lib/postgresql/data
       - ./postgres/init.sql:/docker-entrypoint-initdb.d/init.sql
-    environment:
-      - POSTGRES_DB=$DB_DBNAME_DEV
+    env_file:
+      - .env
     networks:
       - my-network
 
