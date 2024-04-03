@@ -13,9 +13,9 @@ services:
       - .env
     networks:
       - my-network
-      
- db:
-    container_name: postgres:container
+
+  db:  
+    container_name: postgres-container
     build:
       context: ./postgres
       dockerfile: Dockerfile
@@ -28,7 +28,7 @@ services:
       - pgdata:/var/lib/postgresql/data
     networks:
       - my-network
-      
+
 networks:
   my-network:
     driver: bridge
