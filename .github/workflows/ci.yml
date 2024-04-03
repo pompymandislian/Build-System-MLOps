@@ -1,4 +1,4 @@
-name: Dev Testing 🔎 
+name: Dev Testing 🔎
 
 on:
   push:
@@ -11,7 +11,7 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
-      
+
       - name: Create .env file
         run: |
           echo "POSTGRES_USER=${{ secrets.DB_USER_DEV }}" > .env
@@ -22,12 +22,12 @@ jobs:
 
       - name: Build and Run Container
         run: |
-          sudo docker compose up db app-dev --build --detach
+          sudo docker-compose up -d db app-dev
           
       - name: Hit Endpoint
         run: |
           sleep 20
-          curl ${{ vars.DEV_URL }}
+          curl ${{ secrets.DEV_URL }}
           
       - name: Testing
         run: |
