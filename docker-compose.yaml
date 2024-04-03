@@ -2,7 +2,7 @@ version: "3.8"
 services:
   app-dev:
     build:
-      context: ./app
+      context: ./backend
       dockerfile: Dockerfile
     restart: always
     depends_on:
