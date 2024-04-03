@@ -14,34 +14,24 @@ services:
     networks:
       - my-network
       
-  backend:
-    image: backend:latest
+ db:
+    container_name: postgres:container
     build:
-      context: ./backend
-    container_name: backend-container
-    ports:
-      - "8000:8000"
-    networks:
-      - my-network
-    depends_on:
-      - db
-    env_file:
-      - .env
-  db:
-    image: postgres:latest
-    container_name: db-container
+      context: ./postgres
+      dockerfile: Dockerfile
+    restart: always
     ports:
       - 5432:5432
-    volumes:
-      - pgdata:/var/lib/postgresql/data
     env_file:
       - .env
+    volumes:
+      - pgdata:/var/lib/postgresql/data
     networks:
       - my-network
-
+      
 networks:
   my-network:
     driver: bridge
 
 volumes:
-  postgres-volume:
+  pgdata:
